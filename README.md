@@ -28,7 +28,7 @@ CinemaScope is a dynamic movie review and rating platform where users can log in
 | ----------------- | ------------------------------------------------------------------ |
 | BG Color | ![#262626](https://via.placeholder.com/10/262626?text=+) #262626 |
 | Text Color | ![#e5e5e5](https://via.placeholder.com/10/e5e5e5?text=+) #e5e5e5 |
-
+| Section Color | ![#151b23](https://via.placeholder.com/10/151b23?text=+) #151b23 |
 
 
 
