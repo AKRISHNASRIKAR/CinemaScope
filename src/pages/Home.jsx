@@ -13,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const data = await getMovies('nowplaying');                           {  /* Fetch movies*/ }
+                const data = await getMovies('nowplaying');                  {  /* Fetch movies*/ }
                 
                 // Filter movies with valid backdrop images
                 const validMovies = data.filter(movie => 
