@@ -1,0 +1,2 @@
+export const logoURL = 'https://seeklogo.com/images/C/cinemascope-logo-F1153FB5FA-seeklogo.com.png'
+
