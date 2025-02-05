@@ -14,18 +14,22 @@ const Home = () => {
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
-      const fetchMovies = async () => {
-      try {
-        const response = await axios.get(
-          `${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US`
-        );
-        setMovies(response.data.results);
-      } catch (err) {
-        setError(err.message || "Failed to fetch movies.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchMovies = async () => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/movie/popular?api_key=${import.meta.env.VITE_API_KEY}&language=en-US`);
+    
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    
+    const data = await response.json();
+    setMovies(data.results);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+
   
 
     fetchMovies();
