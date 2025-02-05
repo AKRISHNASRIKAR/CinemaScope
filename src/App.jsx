@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
 import Home from './pages/Home';
 import LoginPage from './components/LoginPage'; 
-import Header from './components/common/header'; 
+import Header from './components/common/Header'; 
 import Profile from './pages/Profile';
 import FilmPage from './pages/FilmPage'; // Import the FilmPage component
 
