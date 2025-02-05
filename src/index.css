@@ -1,0 +1,39 @@
+* {  margin: 0;
+    padding: 0;
+    
+  }
+  
+  html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ 
+body {
+  background-color: black;
+  color: white; /* Ensures text is readable */
+  margin: 0;
+  padding: 1;
+  font-family: Arial, sans-serif; /* Optional font change */
+}
+
+html {
+  scrollbar-width: none; /* For Firefox */
+}
+
+body {
+  overflow-y: scroll; /* Enable vertical scrolling without scrollbar */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+
+.container {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Ensure nothing spills out */
+  height: 100%; /* Keep height bounded */
+}
