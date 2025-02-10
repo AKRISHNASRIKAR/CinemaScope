@@ -13,27 +13,40 @@ const Home = () => {
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      console.log('Environment Variables:', {
-        API_BASE_URL,
-        API_KEY_EXISTS: !!API_KEY
-      });
+    const fetchWithTimeout = async (url, timeout = 5000) => {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
 
+      try {
+        const response = await fetch(url, {
+          signal: controller.signal,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        clearTimeout(id);
+        return response;
+      } catch (error) {
+        clearTimeout(id);
+        throw error;
+      }
+    };
+
+    const fetchMovies = async () => {
       try {
         if (!API_BASE_URL || !API_KEY) {
           throw new Error('Missing environment variables');
         }
 
         const url = `${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US`;
-        console.log('Fetching from:', url);
-
-        const response = await fetch(url);
+        const response = await fetchWithTimeout(url);
+        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        console.log('Received data:', data);
         setMovies(data.results);
         setLoading(false);
       } catch (error) {
