@@ -130,7 +130,7 @@ const FilmPage = () => {
         </Typography>
         <Rating>
           <Typography>Average Rating:</Typography>
-          <Typography> ⭐ {film.vote_average ? (film.vote_average / 2).toFixed(1) : "N/A"} / 5</Typography>
+          <Typography> ⭐ {film.vote_average ? film.vote_average.toFixed(1) : "N/A"} / 10</Typography>
         </Rating>
         <Typography>Certification: {certification}</Typography>
         <Typography>
