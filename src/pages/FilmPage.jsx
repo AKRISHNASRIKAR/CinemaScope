@@ -129,7 +129,7 @@ const FilmPage = () => {
           {film.overview || "No overview available"}
         </Typography>
         <Rating>
-          <Typography>Average Rating:</Typography>
+          <Typography>Rating:</Typography>
           <Typography> ⭐ {film.vote_average ? film.vote_average.toFixed(1) : "N/A"} / 10</Typography>
         </Rating>
         <Typography>Certification: {certification}</Typography>
