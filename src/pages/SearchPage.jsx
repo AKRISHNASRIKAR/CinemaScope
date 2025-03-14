@@ -35,7 +35,7 @@ const SearchPage = () => {
   }, [query]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-6 py-8 flex flex-row ">
+    <div className="min-h-screen bg-[#121212] text-white px-6 py-8 flex flex-row ">
       <h2 className="text-xl lg:text-3xl font-bold mb-6">
         Search Results for "{query}"
       </h2>

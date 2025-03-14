@@ -84,7 +84,7 @@ const Person = () => {
                         : "/fallback-image.jpg"
                     }
                     alt={credit.title || "No Title Available"}
-                    className="w-full h-[225px] rounded-md shadow-md object-cover mb-2 cursor-pointer rounded-lg" // Film poster: full width, fixed height, rounded, shadow, cover fit, clickable
+                    className="w-full h-[225px] rounded-lg shadow-md object-cover mb-2 cursor-pointer" // Film poster: full width, fixed height, rounded, shadow, cover fit, clickable
                     onClick={() => navigate(`/movie/${credit.id}`)} // Navigate to film page on click
                   />
                   <p className="text-sm truncate text-right">{credit.title || "Untitled"}</p> {/* Title: small text, truncate if too long, right-aligned */}
