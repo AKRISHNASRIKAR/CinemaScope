@@ -15,6 +15,7 @@ const Container = styled(Box)`
 
 const Poster = styled("img")`
   width: 400px;
+  height: 600px;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
