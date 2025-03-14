@@ -110,7 +110,7 @@ const FilmPage = () => {
   }
 
   return (
-    <Container className="min-h-screen bg-[#121212]">
+    <Container className="min-h-screen  overflow:hidden bg-[#121212]">
       <Poster
         src={
           film.poster_path
@@ -153,7 +153,7 @@ const FilmPage = () => {
             Cast
           </Typography>
           <CastContainer>
-            {cast.slice(0,10).map((member) => (
+            {cast.slice(0,7).map((member) => (
               <CastMember key={member.id}>
                 <CastImage
                   src={

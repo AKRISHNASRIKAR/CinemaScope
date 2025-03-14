@@ -5,9 +5,10 @@ import LoginPage from './components/LoginPage';
 import Header from './components/common/Header'; 
 import Profile from './pages/Profile';
 import FilmPage from './pages/FilmPage'; // Import the FilmPage component
+import SearchPage from './pages/SearchPage';
+import Person from "./pages/Person";
 
-
-
+import './App.css';
 
 
 const ProtectedRoute = ({ component, ...args }) => {
@@ -24,6 +25,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
         <Route path="/film/:id" element={<ProtectedRoute component={FilmPage} />} /> {/* FilmPage route */}
+        <Route path="/person/:person_id" element={<ProtectedRoute component={Person} />} />    {/* Person route */} 
+        <Route path="/search/:query" element={<SearchPage />} />     {/* SearchPage routr */}
       </Routes>
     </Router>
   );

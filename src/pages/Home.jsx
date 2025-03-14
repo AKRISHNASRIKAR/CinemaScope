@@ -79,8 +79,8 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#121212]">
-      <Box>
+    <div className="min-h-screen gap-4">
+      <Box className=" gap-4">
         <Banner movies={movies} />
       </Box>
       <PopularMoviesSection movies={movies} />

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import DragHandleIcon from "@mui/icons-material/Menu";
 import Bookmark from "@mui/icons-material/BookmarkAdd";
+import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ import { logoURL } from "../../constants/constant";
 
 // Styled Components
 const StyledToolbar = styled(Toolbar)`
-  background: #000000;
+  background: #000000; /* Black background matching the image */
   min-height: 54px !important;
   padding: 0 30px !important;
   justify-content: space-between;
@@ -37,84 +38,69 @@ const StyledToolbar = styled(Toolbar)`
     & > p {
       font-size: 14px;
       font-weight: 600;
+      color: white; 
     }
   }
 
   & > p {
     font-size: 14px;
     font-weight: 600;
+    color: white; 
     cursor: pointer;
   }
 `;
 
 const InputSearchField = styled(InputBase)`
-  background: #434343;
-  height: 30px;
-  width: 70em;
-  border-radius: 0px;
-  padding: 5px;
-  color: white;
+  background:rgba(24, 23, 23, 0.81); /* Black background matching the image */
+  height: 32px; /* Matches the height in the provided image */
+  width: 40em; /* Maintains width from previous version, matching the image */
+  border-radius: 8px; 
+  padding: 5px 10px; 
+  color: #ffffff;
+
+  &::placeholder {
+    color: #ffffff; /* White placeholder text */
+    opacity: 0.7; /* Subtle opacity for placeholder, matching the image */
+  }
+
+  &:focus {
+    outline: none;
+    border: 2px solid #ffffff; /* White focus ring for visibility on black background */
+  }
 `;
 
-const SuggestionsBox = styled(Box)`
+const SearchIconWrapper = styled(Box)`
   position: absolute;
-  background: black;
-  width: 70%;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 5px;
-  border: 1px solid #434343;
-`;
-
-const SuggestionItem = styled(Box)`
-  padding: 10px;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
   color: white;
+  opacity: 0.7;
+
   &:hover {
-    background: #333;
+    opacity: 1;
   }
 `;
 
 const Logo = styled("img")({
-  width: 128,
+  width: 110, /* Wider logo to match "CINEMASCOPE" text width in the image */
+  height: "auto", /* Maintain aspect ratio */
 });
 
 const Header = () => {
   const [open, setOpen] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
 
   const { user, isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
 
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const API_KEY = import.meta.env.VITE_API_KEY;
-
-  const handleSearch = async (query) => {
-    setSearchQuery(query);
-    if (query.length > 2) {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}`
-        );
-        setSuggestions(response.data.results.slice(0, 3));
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-      }
-    } else {
-      setSuggestions([]);
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search/${searchQuery.trim().split(" ").join("-")}`);
+      setSearchQuery("");
     }
-  };
-
-  const handleSelectMovie = (movieId) => {
-    navigate(`/film/${movieId}`);
-    setSearchQuery("");
-    setSuggestions([]);
   };
 
   const handleClick = (e) => {
@@ -139,9 +125,9 @@ const Header = () => {
   };
 
   const handleProfileNavigation = () => {
-    navigate("/profile");                                                         //For onclick logo routing
+    navigate("/profile");
     setAnchorEl(null);
-  };                  
+  };
 
   const handleLogoClick = () => {
     navigate("/");
@@ -151,38 +137,46 @@ const Header = () => {
     <AppBar position="static">
       <StyledToolbar>
         <Box onClick={handleLogoClick} style={{ cursor: "pointer" }}>
-          <Logo src={logoURL} alt="logo" />
+          <Logo src={logoURL} alt="CINEMASCOPE logo" />
         </Box>
         <Box onClick={handleClick}>
-          <DragHandleIcon />
-          <Typography> Menu </Typography>
+          <DragHandleIcon sx={{ color: "white" }} /> {/* White icon for black background */}
+          <Typography sx={{ color: "white" }}>Menu</Typography> {/* White text */}
         </Box>
         <HeaderMenu open={open} handleClose={handleClose} />
 
-        {/* Search Box with Suggestions */}
-        <Box position="relative">
+        {/* Search Box */}
+        <Box position="relative" display="flex" alignItems="center">
           <InputSearchField
-            placeholder="Search for a movie..."
+            placeholder="Search for a movie or actor..."
             value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-          />                                                                                          
-          {suggestions.length > 0 && (
-            <SuggestionsBox>
-              {suggestions.map((movie) => (
-                <SuggestionItem
-                  key={movie.id}
-                  onClick={() => handleSelectMovie(movie.id)}
-                >
-                  {movie.title}
-                </SuggestionItem>
-              ))}
-            </SuggestionsBox>
-          )}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()} // Handle Enter Key
+          />
+          <button
+            onClick={handleSearch}
+            style={{
+              position: "absolute",
+              right: "5px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }
+          
+          }
+          >
+            <SearchIconWrapper onClick={handleSearch}>
+            <SearchIcon  sx={{ color: "white", opacity: 0.7, "&:hover": { opacity: 1 } , paddingLeft: "36px"}} /> {/* White search icon for black search bar */}
+            </SearchIconWrapper>
+          </button>
+          
         </Box>
 
         <Box>
-          <Bookmark />
-          <Typography> Watchlist</Typography>
+          <Bookmark sx={{ color: "white" }} /> {/* White icon for black background */}
+          <Typography sx={{ color: "white" }}>Watchlist</Typography> {/* White text */}
         </Box>
 
         <Box onClick={handleProfileClick}>
@@ -192,10 +186,10 @@ const Header = () => {
                 src={user.picture}
                 sx={{ width: 30, height: 30, marginRight: 1 }}
               />
-              <Typography>{user.name}</Typography>
+              <Typography sx={{ color: "white" }}>{user.name}</Typography> {/* White text */}
             </>
           ) : (
-            <Typography> Sign In </Typography>
+            <Typography sx={{ color: "white" }}>Sign In</Typography> 
           )}
         </Box>
 
@@ -203,6 +197,12 @@ const Header = () => {
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
+          sx={{
+            "& .MuiPaper-root": {
+              backgroundColor: "#000000", /* Black background for dropdown */
+              color: "#ffffff", /* White text for dropdown */
+            },
+          }}
         >
           <MenuItem onClick={handleProfileNavigation}>Profile</MenuItem>
           <MenuItem onClick={handleLogout}>Sign Out</MenuItem>

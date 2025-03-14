@@ -22,7 +22,7 @@ const MoviesGrid = styled(Box)`
   padding: 16px 0;
   gap: 16px;
 
-  /* Hide scrollbars */
+  //scrollbar hide
   scrollbar-width: none;
   -ms-overflow-style: none;
 
@@ -57,12 +57,12 @@ const MovieCard = styled(Box)`
 
 const PopularMoviesSection = ({ movies }) => {
   return (
-    <Container>
-      <Header>What's Popular</Header>
+    <Container >
+      <Header className=" gap-4 z-5 " >What's Popular</Header>
       <MoviesGrid>
         {movies.map((movie) => (
           <MovieCard key={movie.id}>
-            {/* Wrap poster with Link */}
+            {/* Poster/ Headshot */}
             <Link to={`/film/${movie.id}`}>
               <img
                 src={

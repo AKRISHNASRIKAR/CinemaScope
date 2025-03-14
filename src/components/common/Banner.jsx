@@ -34,13 +34,13 @@ const Banner = ({ movies }) => {
 
     return (
         <div 
-            className="banner"
+            className="banner mx-auto"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <button 
                 onClick={prevSlide} 
-                className="nav-button prev"
+                className="nav-button prev contrast-50 rounded-lg"
                 aria-label="Previous slide"
             >
                 &lt;
@@ -64,7 +64,7 @@ const Banner = ({ movies }) => {
 
             <button 
                 onClick={nextSlide} 
-                className="nav-button next"
+                className="nav-button next contrast-50 rounded-lg "
                 aria-label="Next slide"
             >
                 &gt;
