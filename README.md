@@ -4,10 +4,9 @@
 
 ## Features  
 - **User Authentication**: Secure login and sign-up functionality, powered by [AUTH0](https://auth0.com), ensures user data protection and personalized experiences.  
-- **IMDB Movie Database**: Movie data (titles, descriptions, ratings) is fetched using [TMDBAPI](https://developer.themoviedb.org/reference/intro/getting-started), providing users with up-to-date information on films.  
+- **Movie Database**: Movie data (titles, descriptions, ratings) is fetched using [TMDBAPI](https://developer.themoviedb.org/reference/intro/getting-started), providing users with up-to-date information on films.  
 - **Custom UI**: The user interface is designed from scratch using [Tailwind CSS](https://tailwindcss.com), ensuring a responsive, sleek, and modern look across all devices.  
-- **Rate and Review**: Users can rate movies, write detailed reviews, and share their opinions with the community.  
-- **Multiple Themes**: Users can toggle between **light mode** and **dark mode** for a personalized viewing experience.  
+
 
 ## Tech Stack  
 - **Frontend**: Built with [React.js](https://reactjs.org) + [Vite](https://vitejs.dev/) for a fast, optimized development experience.  
@@ -32,7 +31,7 @@
     npm install
     ```  
 
-4. Set up environment variables for AUTH0 and RapidAPI keys.  
+4. Set up environment variables for AUTH0 and TMDB keys.  
 
 5. Start the development server:  
     ```bash
