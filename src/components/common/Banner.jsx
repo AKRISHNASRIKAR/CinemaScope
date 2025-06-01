@@ -1,76 +1,128 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./Banner.css";
+import { useNavigate } from "react-router-dom";
 
 const Banner = ({ movies }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
-    const navigate = useNavigate(); // Initialize navigate
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const navigate = useNavigate();
 
-    const nextSlide = () => {
-        setCurrentIndex(prev => (prev + 1) % movies.length);
-    };
+  // Minimum swipe distance required
+  const minSwipeDistance = 50;
 
-    const prevSlide = () => {
-        setCurrentIndex(prev => (prev - 1 + movies.length) % movies.length);
-    };
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % movies.length);
+  };
 
-    useEffect(() => {
-        if (movies.length > 0 && !isHovered) {
-            const interval = setInterval(nextSlide, 3000); // Change every 3 seconds
-            return () => clearInterval(interval);
-        }
-    }, [currentIndex, movies.length, isHovered]);
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + movies.length) % movies.length);
+  };
 
-    if (!movies?.length) {
-        return (
-            <div className="banner">
-                <h2>No upcoming movies found.</h2>
-            </div>
-        );
+  // Touch handlers for mobile swipe
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
     }
+  };
 
-    const currentMovie = movies[currentIndex];
+  useEffect(() => {
+    if (movies.length > 0 && !isHovered) {
+      const interval = setInterval(nextSlide, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [currentIndex, movies.length, isHovered]);
 
+  if (!movies?.length) {
     return (
-        <div 
-            className="banner mx-auto"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <button 
-                onClick={prevSlide} 
-                className="nav-button prev contrast-50 rounded-lg"
-                aria-label="Previous slide"
-            >
-                &lt;
-            </button>
-            
-            <div className="banner-content">
-                <img
-                    key={currentMovie.id}
-                    src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
-                    alt={currentMovie.title}
-                    className="banner-image"
-                    onError={(e) => {
-                        e.target.src = './public/fallback-image.jpg';
-                    }}
-                    onClick={() => navigate(`/film/${currentMovie.id}`)} // Navigate to FilmPage
-                />
-                <div className="banner-info">
-                    <h2>{currentMovie.title}</h2>
-                </div>
-            </div>
-
-            <button 
-                onClick={nextSlide} 
-                className="nav-button next contrast-50 rounded-lg "
-                aria-label="Next slide"
-            >
-                &gt;
-            </button>
-        </div>
+      <div className="relative w-full h-screen flex items-center justify-center bg-gray-900">
+        <h2 className="text-white text-2xl">No upcoming movies found.</h2>
+      </div>
     );
+  }
+
+  const currentMovie = movies[currentIndex];
+
+  return (
+    <div
+      className="relative w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-sm text-white border-none p-2 md:p-3 cursor-pointer text-lg md:text-2xl z-10 hover:bg-black/50 transition-all duration-200 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+        aria-label="Previous slide"
+      >
+        <svg
+          className="w-4 h-4 md:w-6 md:h-6"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-sm text-white border-none p-2 md:p-3 cursor-pointer text-lg md:text-2xl z-10 hover:bg-black/50 transition-all duration-200 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+        aria-label="Next slide"
+      >
+        <svg
+          className="w-4 h-4 md:w-6 md:h-6"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </button>
+
+      {/* Banner Content */}
+      <div className="relative w-full h-full flex items-center">
+        <img
+          key={currentMovie.id}
+          src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}
+          alt={currentMovie.title}
+          className="w-full h-full object-cover object-center cursor-pointer"
+          onError={(e) => {
+            e.target.src = "./public/fallback-image.jpg";
+          }}
+          onClick={() => navigate(`/film/${currentMovie.id}`)}
+        />
+
+        {/* Movie Info Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 pb-10 sm:pb-20 lg:pb-40   text-white text-center">
+          <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 lg:mb-4 leading-tight px-2">
+            {currentMovie.title}
+          </h2>
+        </div>
+      </div>
+
+      {/* Touch/Swipe indicators for mobile */}
+      <div className="absolute bottom-20 sm:hidden left-1/2 -translate-x-1/2 text-white/60 text-xs"></div>
+    </div>
+  );
 };
 
 export default Banner;
