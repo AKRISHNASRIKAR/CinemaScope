@@ -3,12 +3,13 @@ import { Box, CircularProgress, Alert } from "@mui/material";
 import Banner from "../components/common/Banner";
 import PopularMoviesSection from "../components/common/PopularMoviesSection";
 import "../index.css";
+import Footer from "../components/common/Footer";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const API_BASE_URL = import.meta.env.VITE_BASE_URL;
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -21,9 +22,9 @@ const Home = () => {
         const response = await fetch(url, {
           signal: controller.signal,
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         });
         clearTimeout(id);
         return response;
@@ -36,16 +37,16 @@ const Home = () => {
     const fetchMovies = async () => {
       try {
         if (!API_BASE_URL || !API_KEY) {
-          throw new Error('Missing environment variables');
+          throw new Error("Missing environment variables");
         }
 
         const url = `${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US`;
         const response = await fetchWithTimeout(url);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
         setMovies(data.results);
         setLoading(false);
@@ -84,6 +85,7 @@ const Home = () => {
         <Banner movies={movies} />
       </Box>
       <PopularMoviesSection movies={movies} />
+      <Footer />
     </div>
   );
 };
