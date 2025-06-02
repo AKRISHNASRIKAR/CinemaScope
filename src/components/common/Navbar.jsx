@@ -66,7 +66,7 @@ const Header = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-2 border-transparent focus:outline-none transition-colors"
+              className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 p-1 text-sm border-2 border-transparent focus:outline-none transition-colors"
             />
             <button
               onClick={handleSearch}
@@ -101,7 +101,7 @@ const Header = () => {
 
           {/* Profile Dropdown */}
           {isProfileMenuOpen && isAuthenticated && (
-            <div className="absolute right-0 top-full mt-2 w-48 bg-black border border-gray-700 rounded-lg shadow-lg z-50">
+            <div className="absolute right-0 top-full mt-2 w-48 bg-[#121116] border-gray-700 rounded-lg shadow-lg z-50">
               <button
                 onClick={handleProfileNavigation}
                 className="w-full text-left px-4 py-2 text-sm hover:bg-gray-800 transition-colors"
@@ -128,7 +128,7 @@ const Header = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-2 border-transparent focus:border-white focus:outline-none transition-colors"
+            className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-2 border-transparent  focus:outline-none transition-colors"
           />
           <button
             onClick={handleSearch}
