@@ -62,7 +62,7 @@ const Banner = ({ movies }) => {
 
   return (
     <div
-      className="relative w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center"
+      className="relative w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center rounded-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
