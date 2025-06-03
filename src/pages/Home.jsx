@@ -81,7 +81,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen gap-4">
-      <Box className=" gap-4">
+      <Box className=" gap-4 p-2">
         <Banner movies={movies} />
       </Box>
       <PopularMoviesSection movies={movies} />
