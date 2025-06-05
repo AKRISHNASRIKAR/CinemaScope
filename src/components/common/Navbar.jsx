@@ -4,15 +4,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
 import { logoURL } from "../../constants/constant";
 
-const SearchIcon = () => (
-  <svg
-    className="w-4 h-4 pointer-events-none"
-    fill="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-  </svg>
-);
+import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,7 +44,7 @@ const Header = () => {
           <img
             src={logoURL}
             alt="CINEMASCOPE logo"
-            className="w-28 p-2 h-auto"
+            className="w-28 p-2 h-auto px-2"
           />
         </div>
 
@@ -120,15 +112,15 @@ const Header = () => {
       </nav>
 
       {/* Mobile & Tablet Search Bar - Updated for better tablet appearance */}
-      <div className="sm:hidden px-4 pb-3">
-        <div className="relative">
+      <div className="sm:hidden px-10 pb-10 py-3 p-2 mb">
+        <div className="relative pb-10 pr-4">
           <input
             type="text"
             placeholder="Search for a movie or actor..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-2 border-transparent  focus:outline-none transition-colors"
+            className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-20 text-white placeholder-white/70 text-sm border-2 border-transparent  focus:outline-none transition-colors"
           />
           <button
             onClick={handleSearch}
@@ -139,7 +131,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* HeaderMenu Component */}
+      {/* HeaderMenu */}
       <HeaderMenu open={isMenuOpen} handleClose={() => setIsMenuOpen(false)} />
     </header>
   );

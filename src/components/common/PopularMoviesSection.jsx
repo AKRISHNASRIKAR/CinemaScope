@@ -1,70 +1,26 @@
 import React from "react";
-import { Box, Typography, styled } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const Container = styled(Box)`
-  width: 100%;
-  max-width: 100vw;
-  overflow: hidden;
-`;
-
-const Header = styled(Typography)`
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 16px;
-`;
-
-const MoviesGrid = styled(Box)`
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 16px 0;
-  gap: 16px;
-
-  //scrollbar hide
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const MovieCard = styled(Box)`
-  flex: 0 0 auto;
-  width: 150px;
-  text-align: center;
-  color: #fff;
-
-  img {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .rating {
-    background-color: #000;
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 12px;
-    font-size: 12px;
-    margin-top: 4px;
-    display: inline-block;
-  }
-`;
 
 const PopularMoviesSection = ({ movies }) => {
   return (
-    <Container >
-      <Header className=" gap-4 z-5 " >What's Popular</Header>
-      <MoviesGrid>
+    <div className="w-full max-w-full overflow-hidden p-2 pb-10">
+      <h2 className="text-2xl font-bold text-white mb-4 p-3 pt-5 pb-4">
+        What's Popular
+      </h2>
+
+      <div
+        className="flex flex-nowrap overflow-x-auto py-4 gap-4 
+          [scrollbar-width:none] [-ms-overflow-style:none]
+          [&::-webkit-scrollbar]:hidden"
+      >
         {movies.map((movie) => (
-          <MovieCard key={movie.id}>
-            {/* Poster/ Headshot */}
+          <div
+            key={movie.id}
+            className="flex-shrink-0 w-[150px] text-center text-white"
+          >
             <Link to={`/film/${movie.id}`}>
               <img
+                className="w-full rounded-lg object-cover shadow-md"
                 src={
                   movie.poster_path
                     ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -73,25 +29,28 @@ const PopularMoviesSection = ({ movies }) => {
                 alt={movie.title}
               />
             </Link>
-            <Typography variant="body1" mt={1}>
+
+            <p className="mt-2 text-sm font-medium line-clamp-1">
               {movie.title}
-            </Typography>
-            <Typography variant="caption">
+            </p>
+
+            <p className="text-xs text-gray-300 mt-1">
               {new Date(movie.release_date).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
               })}
-            </Typography>
-            <div className="rating">
+            </p>
+
+            <span className="bg-black text-white text-xs py-0.5 px-2 rounded-full inline-block mt-1">
               {movie.vote_average
                 ? `${Math.round(movie.vote_average * 10)}%`
                 : "NR"}
-            </div>
-          </MovieCard>
+            </span>
+          </div>
         ))}
-      </MoviesGrid>
-    </Container>
+      </div>
+    </div>
   );
 };
 
