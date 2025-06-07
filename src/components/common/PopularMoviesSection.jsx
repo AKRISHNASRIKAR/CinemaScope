@@ -3,24 +3,20 @@ import { Link } from "react-router-dom";
 
 const PopularMoviesSection = ({ movies }) => {
   return (
-    <div className="w-full max-w-full overflow-hidden p-2 pb-10">
-      <h2 className="text-2xl font-bold text-white mb-4 p-3 pt-5 pb-4">
+    <div className="w-full max-w-full overflow-hidden p-4 pb-10">
+      <h2 className="text-lg md:text-xl px-4 md:px-10 mt-2 font-bold text-white mb-4 pt-5 pb-4">
         What's Popular
       </h2>
 
-      <div
-        className="flex flex-nowrap overflow-x-auto py-4 gap-4 
-          [scrollbar-width:none] [-ms-overflow-style:none]
-          [&::-webkit-scrollbar]:hidden"
-      >
+      <div className="flex flex-nowrap lg:overflow-hidden md:overflow-hidden sm:overflow-x-auto py-2 gap-3 px-4 md:gap-4 md:px-10">
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className="flex-shrink-0 w-[150px] text-center text-white"
+            className="flex-shrink-0 w-[110px] md:w-[150px] text-center text-white"
           >
             <Link to={`/film/${movie.id}`}>
               <img
-                className="w-full rounded-lg object-cover shadow-md"
+                className="w-full rounded-lg object-cover shadow-md aspect-[2/3]"
                 src={
                   movie.poster_path
                     ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -36,7 +32,6 @@ const PopularMoviesSection = ({ movies }) => {
 
             <p className="text-xs text-gray-300 mt-1">
               {new Date(movie.release_date).toLocaleDateString("en-US", {
-                day: "numeric",
                 month: "short",
                 year: "numeric",
               })}

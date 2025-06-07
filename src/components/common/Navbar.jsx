@@ -111,20 +111,20 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Mobile & Tablet Search Bar - Updated for better tablet appearance */}
-      <div className="sm:hidden px-10 pb-10 py-3 p-2 mb">
-        <div className="relative pb-10 pr-4">
+      {/* Mobile & Tablet Search Bar */}
+      <div className="sm:hidden py-3 px-4 xs:px-6 mb-4">
+        <div className="relative">
           <input
             type="text"
             placeholder="Search for a movie or actor..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-20 text-white placeholder-white/70 text-sm border-2 border-transparent  focus:outline-none transition-colors"
+            className="w-full h-10 bg-[#121116] rounded-lg px-4 pr-12 text-white placeholder-white/70 text-sm border-2 border-transparent focus:outline-none transition-colors"
           />
           <button
             onClick={handleSearch}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-1"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
           >
             <SearchIcon />
           </button>
