@@ -3,7 +3,6 @@ import { Box, CircularProgress, Alert } from "@mui/material";
 import Banner from "../components/common/Banner";
 import PopularMoviesSection from "../components/common/PopularMoviesSection";
 import "../index.css";
-import Footer from "../components/common/Footer";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -86,7 +85,6 @@ const Home = () => {
       </Box>
       <div>
         <PopularMoviesSection movies={movies} />
-        <Footer />
       </div>
     </div>
   );

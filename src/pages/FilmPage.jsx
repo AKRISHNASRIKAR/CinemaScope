@@ -1,62 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Typography, styled } from "@mui/material";
 import axios from "axios";
-
-// Styled components
-const Container = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
-  background-color: #121212;
-  color: #fff;
-  gap: 20px;
-`;
-
-const Poster = styled("img")`
-  width: 400px;
-  height: 600px;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-`;
-
-const Details = styled(Box)`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
-
-const Rating = styled(Box)`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #f5c518;
-`;
-
-const CastContainer = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 10px 0;
-`;
-
-const CastMember = styled(Box)`
-  flex: 0 0 auto;
-  text-align: center;
-`;
-
-const CastImage = styled("img")`
-  width: 100px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-`;
 
 const FilmPage = () => {
   const { id } = useParams();
@@ -71,8 +15,6 @@ const FilmPage = () => {
   useEffect(() => {
     const fetchFilmData = async () => {
       try {
-        console.log("Fetching details for movie ID:", id);
-
         // Fetch film details
         const filmResponse = await axios.get(
           `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
@@ -103,77 +45,301 @@ const FilmPage = () => {
   }, [id]);
 
   if (error) {
-    return <Typography>{error}</Typography>;
+    return (
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
+        <div className="text-white p-4 text-center">{error}</div>
+      </div>
+    );
   }
 
   if (!film) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
+        <div className="text-white p-4">Loading...</div>
+      </div>
+    );
   }
 
   return (
-    <Container className="min-h-screen  overflow:hidden bg-[#121212]">
-      <Poster
-        src={
-          film.poster_path
-            ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-            : "/fallback-image.jpg"
-        }
-        alt={film.title || "No Title Available"}
-      />
+    <div className="min-h-screen bg-[#121212] text-white">
+      {/* Mobile Layout (< 768px) */}
+      <div className="md:hidden px-4 pt-8 pb-6">
+        <div className="flex flex-col items-center gap-6">
+          <img
+            src={
+              film.poster_path
+                ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
+                : "/fallback-image.jpg"
+            }
+            alt={film.title || "No Title Available"}
+            className="w-full max-w-[280px] rounded-lg shadow-lg aspect-[2/3] object-cover"
+          />
 
-      <Details>
-        <Typography variant="h4">{film.title}</Typography>
-        <Typography variant="subtitle1" sx={{ fontStyle: "italic" }}>
-          {film.tagline || "No tagline available"}
-        </Typography>
-        <Typography variant="body1">
-          {film.overview || "No overview available"}
-        </Typography>
-        <Rating>
-          <Typography>Rating:</Typography>
-          <Typography> ⭐ {film.vote_average ? film.vote_average.toFixed(1) : "N/A"} / 10</Typography>
-        </Rating>
-        <Typography>Certification: {certification}</Typography>
-        <Typography>
-          Release Date:{" "}
-          {film.release_date
-            ? new Date(film.release_date).toDateString()
-            : "N/A"}
-        </Typography>
-        <Typography>
-          Runtime: {film.runtime ? `${film.runtime} minutes` : "N/A"}
-        </Typography>
-        <Typography>
-          Genres:{" "}
-          {film.genres ? film.genres.map((g) => g.name).join(", ") : "N/A"}
-        </Typography>
+          <div className="w-full space-y-4">
+            <h1 className="text-2xl font-bold text-center">{film.title}</h1>
+            {film.tagline && (
+              <p className="italic text-gray-400 text-center">{film.tagline}</p>
+            )}
 
-        {/* Cast Section */}
-        <Box mt={4}>
-          <Typography variant="h5" gutterBottom>
-            Cast
-          </Typography>
-          <CastContainer>
-            {cast.slice(0,7).map((member) => (
-              <CastMember key={member.id}>
-                <CastImage
-                  src={
-                    member.profile_path
-                      ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
-                      : "/fallback-image.jpg"
-                  }
-                  alt={member.name}
-                />
-                <Typography variant="body2" className="mt-1">
-                  {member.name}
-                </Typography>
-              </CastMember>
-            ))}
-          </CastContainer>
-        </Box>
-      </Details>
-    </Container>
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-yellow-400 font-bold">⭐</span>
+              <span>
+                {film.vote_average ? film.vote_average.toFixed(1) : "N/A"} / 10
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 text-sm">
+              <div className="flex justify-between">
+                <span className="font-bold text-yellow-400">
+                  Certification:
+                </span>
+                <span>{certification}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold text-yellow-400">Release Date:</span>
+                <span>
+                  {film.release_date
+                    ? new Date(film.release_date).toDateString()
+                    : "N/A"}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold text-yellow-400">Runtime:</span>
+                <span>{film.runtime ? `${film.runtime} minutes` : "N/A"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="font-bold text-yellow-400">Genres:</span>
+                <span className="text-right">
+                  {film.genres
+                    ? film.genres.map((g) => g.name).join(", ")
+                    : "N/A"}
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <h2 className="font-bold text-yellow-400 text-lg mb-3">
+                Overview
+              </h2>
+              <p className="leading-relaxed">
+                {film.overview || "No overview available"}
+              </p>
+            </div>
+          </div>
+
+          {/* Cast Section - Mobile */}
+          <div className="w-full mt-8">
+            <h2 className="text-xl font-bold mb-4">Cast</h2>
+            <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide">
+              {cast.slice(0, 8).map((member) => (
+                <div
+                  key={member.id}
+                  className="flex-shrink-0 w-[90px] text-center"
+                >
+                  <img
+                    src={
+                      member.profile_path
+                        ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
+                        : "/fallback-image.jpg"
+                    }
+                    alt={member.name}
+                    className="w-full h-[135px] rounded-lg object-cover shadow-md"
+                  />
+                  <p className="mt-2 text-xs leading-tight">{member.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Tablet Layout (768px - 1024px) */}
+      <div className="hidden md:block lg:hidden px-6 pt-10 pb-8">
+        <div className="flex flex-col gap-8">
+          <div className="flex gap-6">
+            <div className="flex-shrink-0">
+              <img
+                src={
+                  film.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
+                    : "/fallback-image.jpg"
+                }
+                alt={film.title || "No Title Available"}
+                className="w-[280px] h-[420px] rounded-lg shadow-lg object-cover"
+              />
+            </div>
+
+            <div className="flex-1 space-y-5">
+              <h1 className="text-3xl font-bold">{film.title}</h1>
+              {film.tagline && (
+                <p className="italic text-gray-400 text-lg">{film.tagline}</p>
+              )}
+
+              <div className="flex items-center gap-2 text-lg">
+                <span className="text-yellow-400 font-bold">⭐</span>
+                <span>
+                  {film.vote_average ? film.vote_average.toFixed(1) : "N/A"} /
+                  10
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="font-bold text-yellow-400">
+                    Certification:
+                  </span>{" "}
+                  {certification}
+                </div>
+                <div>
+                  <span className="font-bold text-yellow-400">
+                    Release Date:
+                  </span>{" "}
+                  {film.release_date
+                    ? new Date(film.release_date).toDateString()
+                    : "N/A"}
+                </div>
+                <div>
+                  <span className="font-bold text-yellow-400">Runtime:</span>{" "}
+                  {film.runtime ? `${film.runtime} minutes` : "N/A"}
+                </div>
+                <div className="col-span-2">
+                  <span className="font-bold text-yellow-400">Genres:</span>{" "}
+                  {film.genres
+                    ? film.genres.map((g) => g.name).join(", ")
+                    : "N/A"}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-yellow-400 text-lg mb-3">
+                  Overview
+                </h2>
+                <p className="leading-relaxed">
+                  {film.overview || "No overview available"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Cast Section - Tablet */}
+          <div className="mt-6">
+            <h2 className="text-2xl font-bold mb-4">Cast</h2>
+            <div className="grid grid-cols-6 gap-4">
+              {cast.slice(0, 12).map((member) => (
+                <div key={member.id} className="text-center">
+                  <img
+                    src={
+                      member.profile_path
+                        ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
+                        : "/fallback-image.jpg"
+                    }
+                    alt={member.name}
+                    className="w-full h-[140px] rounded-lg object-cover shadow-md"
+                  />
+                  <p className="mt-2 text-sm leading-tight">{member.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Layout (> 1024px) */}
+      <div className="hidden lg:block px-8 pt-12 pb-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex gap-10">
+            <div className="flex-shrink-0">
+              <img
+                src={
+                  film.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
+                    : "/fallback-image.jpg"
+                }
+                alt={film.title || "No Title Available"}
+                className="w-[350px] h-[525px] rounded-lg shadow-lg object-cover"
+              />
+            </div>
+
+            <div className="flex-1 space-y-6">
+              <h1 className="text-4xl font-bold">{film.title}</h1>
+              {film.tagline && (
+                <p className="italic text-gray-400 text-xl">{film.tagline}</p>
+              )}
+
+              <div className="flex items-center gap-2 text-xl">
+                <span className="text-yellow-400 font-bold">⭐</span>
+                <span>
+                  {film.vote_average ? film.vote_average.toFixed(1) : "N/A"} /
+                  10
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6 text-base">
+                <div>
+                  <span className="font-bold text-yellow-400">
+                    Certification:
+                  </span>{" "}
+                  {certification}
+                </div>
+                <div>
+                  <span className="font-bold text-yellow-400">
+                    Release Date:
+                  </span>{" "}
+                  {film.release_date
+                    ? new Date(film.release_date).toDateString()
+                    : "N/A"}
+                </div>
+                <div>
+                  <span className="font-bold text-yellow-400">Runtime:</span>{" "}
+                  {film.runtime ? `${film.runtime} minutes` : "N/A"}
+                </div>
+                <div>
+                  <span className="font-bold text-yellow-400">Genres:</span>{" "}
+                  {film.genres
+                    ? film.genres.map((g) => g.name).join(", ")
+                    : "N/A"}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-yellow-400 text-2xl mb-4">
+                  Overview
+                </h2>
+                <p className="text-lg leading-relaxed">
+                  {film.overview || "No overview available"}
+                </p>
+              </div>
+
+              {/* Cast Section - Desktop */}
+              <div className="mt-10">
+                <h2 className="text-2xl font-bold mb-6">Cast</h2>
+                <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide">
+                  {cast.slice(0, 10).map((member) => (
+                    <div
+                      key={member.id}
+                      className="flex-shrink-0 w-[100px] text-center"
+                    >
+                      <img
+                        src={
+                          member.profile_path
+                            ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
+                            : "/fallback-image.jpg"
+                        }
+                        alt={member.name}
+                        className="w-[100px] h-[150px] rounded-lg object-cover shadow-md"
+                      />
+                      <p className="mt-2 text-sm leading-tight">
+                        {member.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
-
 export default FilmPage;
