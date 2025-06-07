@@ -80,11 +80,11 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen gap-4 pb-3">
-      <Box className=" gap-4 pb-5">
+    <div className="min-h-screen  pb-3">
+      <Box className=" mt-4 sm:mt-0">
         <Banner movies={movies} />
       </Box>
-      <div className="pt-4">
+      <div>
         <PopularMoviesSection movies={movies} />
         <Footer />
       </div>
