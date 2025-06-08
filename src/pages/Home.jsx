@@ -79,8 +79,8 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen  pb-3">
-      <Box className=" mt-4 sm:mt-0">
+    <div className="min-h-screen p-2 pb-3">
+      <Box className=" mt-4 sm:mt-4">
         <Banner movies={movies} />
       </Box>
       <div>

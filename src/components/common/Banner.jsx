@@ -64,7 +64,7 @@ const Banner = ({ movies }) => {
 
   return (
     <div
-      className="relative w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center rounded-xl p-10"
+      className="relative w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center rounded-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
@@ -89,7 +89,7 @@ const Banner = ({ movies }) => {
       </button>
 
       {/* Banner Main */}
-      <div className="relative w-full h-full flex items-center p-10 pb-10">
+      <div className="relative w-full h-full flex items-center pb-10">
         <img
           key={currentMovie.id}
           src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}

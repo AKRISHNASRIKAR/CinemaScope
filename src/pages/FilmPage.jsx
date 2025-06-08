@@ -46,7 +46,7 @@ const FilmPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
+      <div className="min-h-screen bg-[#1e1e1e] flex items-center justify-center p-4">
         <div className="text-white p-4 text-center">{error}</div>
       </div>
     );
@@ -54,17 +54,17 @@ const FilmPage = () => {
 
   if (!film) {
     return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center p-4">
         <div className="text-white p-4">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
-      {/* Mobile Layout (< 768px) */}
-      <div className="md:hidden px-4 pt-8 pb-6">
-        <div className="flex flex-col items-center gap-6">
+    <div className="min-h-screen bg-[#121212] text-white p-4 sm:p-6 lg:p-8">
+      {/* Mobile Layout */}
+      <div className="md:hidden space-y-4">
+        <div className="flex flex-col items-center mt-4">
           <img
             src={
               film.poster_path
@@ -72,10 +72,10 @@ const FilmPage = () => {
                 : "/fallback-image.jpg"
             }
             alt={film.title || "No Title Available"}
-            className="w-full max-w-[280px] rounded-lg shadow-lg aspect-[2/3] object-cover"
+            className="w-full max-w-[280px] rounded-lg shadow-lg aspect-[2/3] object-cover "
           />
 
-          <div className="w-full space-y-4">
+          <div className="w-full space-y-4 mt-6">
             <h1 className="text-2xl font-bold text-center">{film.title}</h1>
             {film.tagline && (
               <p className="italic text-gray-400 text-center">{film.tagline}</p>
@@ -154,7 +154,7 @@ const FilmPage = () => {
       </div>
 
       {/* Tablet Layout (768px - 1024px) */}
-      <div className="hidden md:block lg:hidden px-6 pt-10 pb-8">
+      <div className="hidden md:block lg:hidden">
         <div className="flex flex-col gap-8">
           <div className="flex gap-6">
             <div className="flex-shrink-0">
@@ -235,6 +235,7 @@ const FilmPage = () => {
                     }
                     alt={member.name}
                     className="w-full h-[140px] rounded-lg object-cover shadow-md"
+                    onClick={() => navigate(`/person/${credit.id}`)}
                   />
                   <p className="mt-2 text-sm leading-tight">{member.name}</p>
                 </div>
@@ -245,7 +246,7 @@ const FilmPage = () => {
       </div>
 
       {/* Desktop Layout (> 1024px) */}
-      <div className="hidden lg:block px-8 pt-12 pb-10">
+      <div className="hidden lg:block">
         <div className="max-w-7xl mx-auto">
           <div className="flex gap-10">
             <div className="flex-shrink-0">
@@ -326,7 +327,7 @@ const FilmPage = () => {
                             : "/fallback-image.jpg"
                         }
                         alt={member.name}
-                        className="w-[100px] h-[150px] rounded-lg object-cover shadow-md"
+                        className="w-[100px] h-[150px] rounded-lg object-cover shadow-md cursor-pointer"
                       />
                       <p className="mt-2 text-sm leading-tight">
                         {member.name}
