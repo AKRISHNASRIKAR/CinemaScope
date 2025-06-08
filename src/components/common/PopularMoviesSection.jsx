@@ -8,7 +8,7 @@ const PopularMoviesSection = ({ movies }) => {
         What's Popular
       </h2>
 
-      <div className="flex flex-nowrap lg:overflow-hidden md:overflow-hidden sm:overflow-x-auto py-2 gap-3 px-4 md:gap-4 md:px-10">
+      <div className="flex flex-nowrap scrollbar-hide overflow-x-auto py-2 gap-3 px-4 md:gap-4 md:px-10 ">
         {movies.map((movie) => (
           <div
             key={movie.id}
