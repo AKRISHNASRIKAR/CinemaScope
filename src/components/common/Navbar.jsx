@@ -37,8 +37,8 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-black text-white px-4 py-4">
-      <nav className="flex items-center justify-between px-4 md:px-8 py-3 min-h-[54px]">
+    <header className="bg-black text-white px-4 py-4 rounded-2xl">
+      <nav className="bg-black/75 rounded-2xl flex items-center justify-between px-8 md:px-8 py-3 min-h-[54px]">
         {/* Logo */}
         <div onClick={handleLogoClick} className="cursor-pointer flex-shrink-0">
           <img
@@ -48,9 +48,9 @@ const Header = () => {
           />
         </div>
 
-        {/* Desktop Navigation - Updated for tablet responsiveness */}
+        {/* Desktop Navigation */}
         <div className="hidden sm:flex items-center space-x-6 flex-1 justify-center max-w-3xl ml-4">
-          {/* Search Box - Made more compact */}
+          {/* Search Box */}
           <div className="relative w-full max-w-lg">
             <input
               type="text"
@@ -80,7 +80,7 @@ const Header = () => {
                 <img
                   src={user.picture}
                   alt={user.name}
-                  className="w-8 h-8 rounded-full"
+                  className="w-10 h-8 rounded-full"
                 />
                 <span className="text-sm font-semibold hidden md:block p-2 px-0.5">
                   {user.name}
