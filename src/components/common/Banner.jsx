@@ -70,6 +70,7 @@ const Banner = ({ movies }) => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      loading="lazy"
     >
       {/* Slide Navigation Buttons */}
       <button
@@ -89,7 +90,10 @@ const Banner = ({ movies }) => {
       </button>
 
       {/* Banner Main */}
-      <div className="relative w-full h-full flex items-center pb-10">
+      <div
+        loading="lazy"
+        className="relative w-full h-full flex items-center pb-10"
+      >
         <img
           key={currentMovie.id}
           src={`https://image.tmdb.org/t/p/original${currentMovie.backdrop_path}`}

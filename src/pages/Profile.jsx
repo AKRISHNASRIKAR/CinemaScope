@@ -1,7 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Typography, Avatar, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 
 const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -9,57 +7,42 @@ const Profile = () => {
 
   if (!isAuthenticated) {
     return (
-      <Box sx={{ textAlign: "center", mt: 5 }}>
-        <Typography variant="h5">You are not logged in.</Typography>
-      </Box>
+      <div className="text-center mt-20">
+        <h2 className="text-xl">You are not logged in.</h2>
+      </div>
     );
   }
 
   return (
-    <Box sx={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Add the Squares component as the background */}
-     
-
+    <div className="relative min-h-screen overflow-hidden">
       {/* Profile content */}
-      <Box
-        sx={{
-          position: "relative",
-          zIndex: 1,
-          textAlign: "center",
-          paddingTop: "5rem",
-          color: "white",
-        }}
-      >
-        <Avatar
+
+      <div className="relative  z-10 text-center pt-20 text-white m-10">
+        <img
           src={user.picture}
-          sx={{ width: 100, height: 100, margin: "auto" }}
+          alt="Profile"
+          className="w-24 h-24 items-center rounded-full mx-auto"
         />
-        <Typography variant="h4" sx={{ mt: 2 }}>
-          {user.name}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
-          {user.email}
-        </Typography>
-        <Box sx={{ mt: 3 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mr: 2 }}
+        <h1 className="text-3xl mt-4">{user.name}</h1>
+        <p className="text-gray-400 p-4">{user.email}</p>
+        <div className="mt-6 p-20 gap-4 flex justify-center">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4"
             onClick={() => navigate("/")}
           >
             Home
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => logout({ returnTo: `${window.location.origin}/home` })}
-
+          </button>
+          <button
+            className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            onClick={() =>
+              logout({ returnTo: `${window.location.origin}/home` })
+            }
           >
             Logout
-          </Button>
-        </Box>
-      </Box>
-    </Box>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

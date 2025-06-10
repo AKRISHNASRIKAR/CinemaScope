@@ -7,7 +7,7 @@ import { logoURL } from "../../constants/constant";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  //const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -40,7 +40,10 @@ const Header = () => {
     <header className="bg-black text-white px-4 py-4 rounded-2xl">
       <nav className="bg-black/75 rounded-2xl flex items-center justify-between px-8 md:px-8 py-3 min-h-[54px]">
         {/* Logo */}
-        <div onClick={handleLogoClick} className="cursor-pointer flex-shrink-0">
+        <div
+          onClick={handleLogoClick}
+          className="cursor-pointer flex-shrink-0 rounded-xl"
+        >
           <img
             src={logoURL}
             alt="CINEMASCOPE logo"
@@ -80,7 +83,7 @@ const Header = () => {
                 <img
                   src={user.picture}
                   alt={user.name}
-                  className="w-10 h-8 rounded-full"
+                  className="w-9 h-8 rounded-full"
                 />
                 <span className="text-sm font-semibold hidden md:block p-2 px-0.5">
                   {user.name}
@@ -112,7 +115,7 @@ const Header = () => {
       </nav>
 
       {/* Mobile & Tablet Search Bar */}
-      <div className="sm:hidden py-3 px-4 xs:px-6 mb-4">
+      <div className="w-full sm:hidden py-3 px-4 xs:px-6 mb-4">
         <div className="relative">
           <input
             type="text"

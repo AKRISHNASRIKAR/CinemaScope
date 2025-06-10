@@ -53,19 +53,12 @@ const SearchPage = () => {
 
   return (
     <div className="min-h-screen bg-[#121212] text-white p-5">
-      {/* Header */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 sm:hidden">
-        <h1 className="text-xl  font-semibold text-center sm:text-left">
-          Search Results for "{query}"
-        </h1>
-      </div>
-
       {/* Main Content */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8 space-y-8 sm:space-y-12">
         {/* Movies Section */}
         {movies.length > 0 && (
           <section>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
+            <h2 className="text-xl p-10 sm:text-2xl text-center lg:text-left font-semibold mb-4 sm:mb-6">
               Movies
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3 sm:gap-4 lg:gap-6">
@@ -80,7 +73,7 @@ const SearchPage = () => {
                       src={
                         movie.poster_path
                           ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                          : "https://via.placeholder.com/300x450/333/fff?text=No+Image"
+                          : "/fallback-image.jpg"
                       }
                       alt={movie.title || movie.name}
                       className="w-full aspect-[2/3] object-cover"
@@ -115,10 +108,10 @@ const SearchPage = () => {
         {/* People Section */}
         {people.length > 0 && (
           <section>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
+            <h2 className="p-10 text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
               Actors & Crew
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-6">
+            <div className="p-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-6">
               {people.map((person) => (
                 <div
                   key={person.id}
@@ -130,7 +123,7 @@ const SearchPage = () => {
                       src={
                         person.profile_path
                           ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
-                          : "https://via.placeholder.com/300x450/444/fff?text=No+Photo"
+                          : "/fallback-image.jpg"
                       }
                       alt={person.name}
                       className="w-full aspect-[2/3] object-cover"

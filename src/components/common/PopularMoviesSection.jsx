@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PopularMoviesSection = ({ movies }) => {
   return (
-    <div className="w-full max-w-full overflow-hidden p-4 pb-10">
+    <div className="w-full max-w-full overflow-hidden p-4 pb-4">
       <h2 className="text-lg md:text-xl px-4 md:px-10 mt-2 font-bold text-white mb-4 pt-5 pb-4">
         What's Popular
       </h2>
