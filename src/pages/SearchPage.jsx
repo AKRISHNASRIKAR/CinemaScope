@@ -73,7 +73,7 @@ const SearchPage = () => {
                       src={
                         movie.poster_path
                           ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                          : "/fallback-image.jpg"
+                          : "/fallback-image-film.jpg"
                       }
                       alt={movie.title || movie.name}
                       className="w-full aspect-[2/3] object-cover"

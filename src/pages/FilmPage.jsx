@@ -61,7 +61,7 @@ const FilmPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-[#121212] rounded-2xl  text-white p-4 sm:p-6 lg:p-8">
       {/* Mobile Layout */}
       <div className="md:hidden space-y-4">
         <div className="flex flex-col items-center mt-4">
@@ -69,7 +69,7 @@ const FilmPage = () => {
             src={
               film.poster_path
                 ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-                : "/fallback-image.jpg"
+                : "/fallback-image-film.jpg"
             }
             alt={film.title || "No Title Available"}
             className="w-full max-w-[280px] rounded-lg shadow-lg aspect-[2/3] object-cover "
@@ -109,7 +109,7 @@ const FilmPage = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-bold text-yellow-400">Genres:</span>
-                <span className="text-right">
+                <span className="items-end-safe">
                   {film.genres
                     ? film.genres.map((g) => g.name).join(", ")
                     : "N/A"}
@@ -162,7 +162,7 @@ const FilmPage = () => {
                 src={
                   film.poster_path
                     ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-                    : "/fallback-image.jpg"
+                    : "/fallback-image-film.jpg"
                 }
                 alt={film.title || "No Title Available"}
                 className="w-[280px] h-[420px] rounded-lg shadow-lg object-cover"
@@ -254,7 +254,7 @@ const FilmPage = () => {
                 src={
                   film.poster_path
                     ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-                    : "/fallback-image.jpg"
+                    : "/fallback-image-film.jpg"
                 }
                 alt={film.title || "No Title Available"}
                 className="w-[350px] h-[525px] rounded-lg shadow-lg object-cover"

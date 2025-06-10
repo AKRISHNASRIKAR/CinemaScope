@@ -17,12 +17,14 @@ const Profile = () => {
     <div className="relative min-h-screen overflow-hidden">
       {/* Profile content */}
 
-      <div className="relative  z-10 text-center pt-20 text-white m-10">
-        <img
-          src={user.picture}
-          alt="Profile"
-          className="w-24 h-24 items-center rounded-full mx-auto"
-        />
+      <div className="relative items-center z-10 text-center pt-20 text-white m-10">
+        <div className="flex items-center justify-center">
+          <img
+            src={user.picture}
+            alt="Profile"
+            className="w-24 h-24 rounded-full"
+          />
+        </div>
         <h1 className="text-3xl mt-4">{user.name}</h1>
         <p className="text-gray-400 p-4">{user.email}</p>
         <div className="mt-6 p-20 gap-4 flex justify-center">
@@ -34,9 +36,7 @@ const Profile = () => {
           </button>
           <button
             className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            onClick={() =>
-              logout({ returnTo: `${window.location.origin}/home` })
-            }
+            onClick={() => logout({ returnTo: `${window.location.origin}/` })}
           >
             Logout
           </button>

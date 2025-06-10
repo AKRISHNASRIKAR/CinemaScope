@@ -10,7 +10,7 @@ const Banner = ({ movies }) => {
   const [touchEnd, setTouchEnd] = useState(null);
   const navigate = useNavigate();
 
-  // Minimum swipe distance required
+  // Minimum swipe distance
   const minSwipeDistance = 50;
 
   const nextSlide = () => {
@@ -64,7 +64,7 @@ const Banner = ({ movies }) => {
 
   return (
     <div
-      className="relative w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center rounded-xl"
+      className="relative p-20 pb-10 w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center  rounded-xl  "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
@@ -92,7 +92,7 @@ const Banner = ({ movies }) => {
       {/* Banner Main */}
       <div
         loading="lazy"
-        className="relative w-full h-full flex items-center pb-10"
+        className="relative w-full h-full  flex items-center pb-10 "
       >
         <img
           key={currentMovie.id}
