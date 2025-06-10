@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-import HeaderMenu from "./HeaderMenu";
+//import HeaderMenu from "./HeaderMenu";
 import { logoURL } from "../../constants/constant";
 
 import SearchIcon from "@mui/icons-material/Search";
@@ -131,8 +131,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* HeaderMenu */}
-      <HeaderMenu open={isMenuOpen} handleClose={() => setIsMenuOpen(false)} />
+      {/* HeaderMenu 
+      <HeaderMenu open={isMenuOpen} handleClose={() => setIsMenuOpen(false)} /> */}
     </header>
   );
 };
