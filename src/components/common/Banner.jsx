@@ -64,7 +64,7 @@ const Banner = ({ movies }) => {
 
   return (
     <div
-      className="relative p-20 pb-10 w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center  rounded-xl  "
+      className="relative p-20 px-8 mb-10 w-full h-[50vh] sm:h-[70vh] lg:h-[92vh] overflow-hidden flex items-center justify-center  rounded-xl  "
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
@@ -76,7 +76,7 @@ const Banner = ({ movies }) => {
       <button
         onClick={prevSlide}
         className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-sm text-white border-none p-2 md:p-3 cursor-pointer text-lg md:text-2xl z-10 hover:bg-black/50 transition-all duration-200 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
-        aria-label="Previous slide"
+        label="Previous slide"
       >
         <ChevronLeftIcon className="w-4 h-4 md:w-6 md:h-6" />
       </button>
@@ -84,15 +84,16 @@ const Banner = ({ movies }) => {
       <button
         onClick={nextSlide}
         className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-sm text-white border-none p-2 md:p-3 cursor-pointer text-lg md:text-2xl z-10 hover:bg-black/50 transition-all duration-200 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
-        aria-label="Next slide"
+        label="Next slide"
       >
         <ChevronRightIcon className="w-4 h-4 md:w-6 md:h-6" />
       </button>
 
       {/* Banner Main */}
+
       <div
         loading="lazy"
-        className="relative w-full h-full  flex items-center pb-10 "
+        className="relative p-20 w-full h-full  flex items-center  "
       >
         <img
           key={currentMovie.id}
@@ -100,7 +101,7 @@ const Banner = ({ movies }) => {
           alt={currentMovie.title}
           className="w-full h-full object-cover object-center cursor-pointer"
           onError={(e) => {
-            e.target.src = "./public/fallback-image.jpg";
+            e.target.src = "./public/fallback-image-film.jpg";
           }}
           onClick={() => navigate(`/film/${currentMovie.id}`)}
         />
