@@ -18,7 +18,7 @@ const ProtectedRoute = ({ component, ...args }) => {
 function App() {
   return (
     <Router>
-      <Header /> {/* Include header outside Routes to make it persistent */}
+      <Header /> {/* Includes Header in every page, persistent */}
       <Routes>
         <Route path="/" element={<ProtectedRoute component={Home} />} />
         <Route path="/login" element={<LoginPage />} />

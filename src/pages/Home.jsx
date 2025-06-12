@@ -79,12 +79,15 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen p-2 pb-3">
-      <Box>
-        <Banner movies={movies} className="mt-4 sm:mt-0" />
-      </Box>
-      <div>
-        <PopularMoviesSection movies={movies} />
+    <div className="min-h-screen">
+      <div className="pt-6 pb-5 px-4">
+        <Box className="mb-8">
+          <Banner movies={movies} />
+        </Box>
+
+        <div className="mt-8">
+          <PopularMoviesSection movies={movies} />
+        </div>
       </div>
     </div>
   );

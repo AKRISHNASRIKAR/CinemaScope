@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-//import HeaderMenu from "./HeaderMenu";
 import { logoURL } from "../../constants/constant";
-
 import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
-  //const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -38,8 +35,9 @@ const Header = () => {
 
   return (
     <header className="bg-black text-white px-4 py-4 rounded-2xl">
+      {/* Main Navigation Bar */}
       <nav className="bg-black/75 rounded-2xl flex items-center justify-between px-8 md:px-8 py-3 min-h-[54px]">
-        {/* Logo */}
+        {/* Logo Section */}
         <div
           onClick={handleLogoClick}
           className="cursor-pointer flex-shrink-0 rounded-xl"
@@ -51,9 +49,8 @@ const Header = () => {
           />
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Search Bar (Hidden on Mobile) */}
         <div className="hidden sm:flex items-center space-x-6 flex-1 justify-center max-w-3xl ml-4">
-          {/* Search Box */}
           <div className="relative w-full max-w-lg">
             <input
               type="text"
@@ -61,7 +58,7 @@ const Header = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 p-1 text-sm border-2 border-transparent focus:outline-none transition-colors"
+              className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-2 border-transparent focus:outline-none transition-colors"
             />
             <button
               onClick={handleSearch}
@@ -83,29 +80,29 @@ const Header = () => {
                 <img
                   src={user.picture}
                   alt={user.name}
-                  className="w-9 h-8 rounded-full"
+                  className="w-9 h-9 rounded-full"
                 />
-                <span className="text-sm font-semibold hidden md:block p-2 px-0.5">
+                <span className="text-xs font-semibold hidden md:block p-2 px-2">
                   {user.name}
                 </span>
               </>
             ) : (
-              <span className="text-sm font-semibold">Sign In</span>
+              <span className="text-sm font-semibold px-5">Sign In</span>
             )}
           </button>
 
           {/* Profile Dropdown */}
           {isProfileMenuOpen && isAuthenticated && (
-            <div className="absolute right-0 top-full mt-2 w-48 bg-[#121116] border-gray-700 rounded-lg shadow-lg z-50">
+            <div className="absolute md:hidden right-0 top-full mt-2 w-32 font-semibold bg-gray-800 border-gray-700 rounded-xl shadow-lg z-50">
               <button
                 onClick={handleProfileNavigation}
-                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-800 transition-colors"
+                className="w-full text-center px-4 py-2 text-sm hover:bg-black transition-colors"
               >
                 Profile
               </button>
               <button
                 onClick={handleLogout}
-                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-800 transition-colors border-t border-gray-700"
+                className="w-full text-center px-4 py-2 text-sm hover:bg-gray-800 transition-colors border-t border-gray-700"
               >
                 Sign Out
               </button>
@@ -114,28 +111,25 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Mobile & Tablet Search Bar */}
-      <div className="w-full sm:hidden py-3 px-4 xs:px-6 mb-4">
-        <div className="relative">
+      {/* Mobile Search Bar - Increased Height & Spacing */}
+      <div className="w-full sm:hidden mt-6 mb-8 px-5 pb-12">
+        <div className="relative w-full flex items-center justify-center">
           <input
             type="text"
             placeholder="Search for a movie or actor..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            className="w-full h-10 bg-[#121116] rounded-lg px-4 pr-12 text-white placeholder-white/70 text-sm border-2 border-transparent focus:outline-none transition-colors"
+            className="w-[88%] h-11 bg-[#121116] rounded-lg text-white placeholder-gray-400 text-sm text-center px-4 pr-12 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
           />
           <button
             onClick={handleSearch}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
+            className="absolute right-10 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-1"
           >
             <SearchIcon />
           </button>
         </div>
       </div>
-
-      {/* HeaderMenu 
-      <HeaderMenu open={isMenuOpen} handleClose={() => setIsMenuOpen(false)} /> */}
     </header>
   );
 };

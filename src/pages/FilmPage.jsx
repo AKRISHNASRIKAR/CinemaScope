@@ -61,10 +61,10 @@ const FilmPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#121212] rounded-2xl  text-white p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-[#121212] rounded-xl text-white p-20 sm:p-8 lg:p-8 ">
       {/* Mobile Layout */}
-      <div className="md:hidden space-y-4">
-        <div className="flex flex-col items-center mt-4">
+      <div className="md:hidden space-y-4 space-x-5 mt-5 ">
+        <div className="flex flex-col items-center ">
           <img
             src={
               film.poster_path
@@ -72,7 +72,7 @@ const FilmPage = () => {
                 : "/fallback-image-film.jpg"
             }
             alt={film.title || "No Title Available"}
-            className="w-full max-w-[280px] rounded-lg shadow-lg aspect-[2/3] object-cover "
+            className="w-full max-w-[300px] rounded-lg shadow-lg aspect-[2/3] object-cover   "
           />
 
           <div className="w-full space-y-4 mt-6">
@@ -235,7 +235,6 @@ const FilmPage = () => {
                     }
                     alt={member.name}
                     className="w-full h-[140px] rounded-lg object-cover shadow-md"
-                    onClick={() => navigate(`/person/${credit.id}`)}
                   />
                   <p className="mt-2 text-sm leading-tight">{member.name}</p>
                 </div>
