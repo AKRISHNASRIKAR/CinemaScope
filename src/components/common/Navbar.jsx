@@ -93,7 +93,7 @@ const Header = () => {
 
           {/* Profile Dropdown */}
           {isProfileMenuOpen && isAuthenticated && (
-            <div className="absolute md:hidden right-0 top-full mt-2 w-32 font-semibold bg-gray-800 border-gray-700 rounded-xl shadow-lg z-50">
+            <div className="absolute  right-0 top-full mt-2 w-32 font-semibold bg-gray-800 border-gray-700 rounded-xl shadow-lg z-50">
               <button
                 onClick={handleProfileNavigation}
                 className="w-full text-center px-4 py-2 text-sm hover:bg-black transition-colors"
