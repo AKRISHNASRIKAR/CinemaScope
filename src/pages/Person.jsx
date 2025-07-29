@@ -42,11 +42,11 @@ const Person = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#121212] p-4 md:p-8">
+    <div className="min-h-screen bg-[#121212] rounded-2xl p-4 md:p-8">
       {/* Layout: column on mobile, row on desktop */}
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
         {/* Profile image */}
-        <div className="w-full md:w-1/3 flex justify-center">
+        <div className="w-full md:w-1/3 mt-2 flex justify-center">
           <img
             src={
               person.profile_path
@@ -60,9 +60,12 @@ const Person = () => {
 
         {/* Person details */}
         <div className="w-full md:w-2/3 flex flex-col text-left">
-          <h1 className="text-2xl text-center font-bold mb-4">{person.name}</h1>
+          <h1 className="text-2xl text-start font-bold mb-2">
+            {" "}
+            {person.name}{" "}
+          </h1>
 
-          <p className="text-base justify justify-center  mb-6">
+          <p className="text-base justify justify-center  m-6">
             {person.biography || "No biography available."}
           </p>
 
