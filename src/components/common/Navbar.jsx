@@ -58,7 +58,7 @@ const Header = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-transparent focus:outline-none transition-colors"
+              className="w-full h-8 bg-[#121116] rounded-lg px-4 pr-10 text-white placeholder-white/70 text-sm border-2 border-transparent focus:outline-none transition-colors"
             />
             <button
               onClick={handleSearch}
@@ -87,7 +87,7 @@ const Header = () => {
                 </span>
               </>
             ) : (
-              <span className="text-sm font-semibold">Sign In</span>
+              <span className="text-sm font-semibold px-5">Sign In</span>
             )}
           </button>
 
